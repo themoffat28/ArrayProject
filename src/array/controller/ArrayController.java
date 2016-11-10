@@ -17,6 +17,8 @@ public class ArrayController
 			hipsters[index] = new HipsterObject("Hipster #" + index);
 		}
 		
+		hipsters[0].setName("Mofo");
+		
 		for(HipsterObject current : hipsters)
 		{
 			System.out.println(current);
