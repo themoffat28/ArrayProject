@@ -10,26 +10,37 @@ public class ArrayController
 	private int[] numbers;
 	private HipsterFrame appFrame;
 
-	public void start()
+	public ArrayController()
 	{
+		showHipsterLevelThree();
+		hipsters = new HipsterObject[5];
+		
 		for(int index = 0; index < hipsters.length; index++)
 		{
 			hipsters[index] = new HipsterObject("Hipster #" + index);
 		}
 		
+		appFrame = new HipsterFrame(this);
+		
+	}
+	
+	public void start()
+	{
 		hipsters[0].setName("Mofo");
 		
 		for(HipsterObject current : hipsters)
 		{
 			System.out.println(current);
 		}
+		
 	}
-
-	public ArrayController()
+	
+	public void impactHipsters()
 	{
-		showHipsterLevelThree();
-		hipsters = new HipsterObject[5];
-		appFrame = new HipsterFrame(this);
+		for(HipsterObject currentHipster : hipsters)
+		{
+			currentHipster.calculateHipsterRank(10, -5);
+		}
 	}
 	
 	private void showHipsterLevelThree()

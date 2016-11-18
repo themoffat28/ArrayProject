@@ -3,6 +3,8 @@ package array.view;
 import javax.swing.*;
 import array.controller.ArrayController;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HipsterPanel extends JPanel
 {
@@ -18,15 +20,14 @@ public class HipsterPanel extends JPanel
 		this.baseController = baseController;
 		this.baseLayout = new SpringLayout();
 		this.myButton = new JButton("Click the button");
-		baseLayout.putConstraint(SpringLayout.NORTH, myButton, 116, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, myButton, 130, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, myButton, -51, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, myButton, -24, SpringLayout.EAST, this);
 		this.infoLabel = new JLabel("Wow words!");
-		baseLayout.putConstraint(SpringLayout.NORTH, infoLabel, 34, SpringLayout.SOUTH, myButton);
-		this.dropDown = new JComboBox(baseController.getWords());
-		baseLayout.putConstraint(SpringLayout.WEST, infoLabel, 0, SpringLayout.WEST, dropDown);
-		baseLayout.putConstraint(SpringLayout.WEST, dropDown, 169, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, dropDown, -34, SpringLayout.NORTH, myButton);
-		
+		baseLayout.putConstraint(SpringLayout.NORTH, infoLabel, 5, SpringLayout.NORTH, myButton);
+		baseLayout.putConstraint(SpringLayout.WEST, infoLabel, 30, SpringLayout.WEST, this);
+		this.dropDown = new JComboBox(baseController.getHipsters());
+		baseLayout.putConstraint(SpringLayout.NORTH, dropDown, 58, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, dropDown, 192, SpringLayout.WEST, this);
 		
 		setupPanel();
 		setupLayout();
@@ -48,6 +49,21 @@ public class HipsterPanel extends JPanel
 	
 	private void setupListeners()
 	{
+		dropDown.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent selection)
+			{
+				infoLabel.setText(dropDown.getSelectedItem().toString());
+			}
+		});
 		
+		myButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				baseController.impactHipsters();
+				repaint();
+			}
+		});
 	}
 }
